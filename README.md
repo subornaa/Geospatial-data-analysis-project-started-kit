@@ -12,6 +12,12 @@ The project choices are listed below and are described in more detailed througho
 
 - **[Mapping Tree Species Across the Petawawa Research Forest using LiDAR](#mapping-tree-species-across-the-petawawa-research-forest-using-lidar)**
 
+## Project selection
+
+Please visit the following link to rank your project choices in order of preference. Projects will be allocated to the groups that respond earliest based their ranking.
+
+**[Rank project choices here](https://docs.google.com/forms/d/e/1FAIpQLSd6MQNUhqkCGPtO4WA5jFoYo4hNb8a_uAQ87fIhnFBkb6fitA/viewform?usp=header)**
+
 ## Data
 
 **All project data can be downloaded from the GEM530 Discussion Teams page under:**
