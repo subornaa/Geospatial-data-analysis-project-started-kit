@@ -62,6 +62,10 @@ The data directory is structured as follows, with one folder per project. Each f
 
 ## Analyzing Topographic Trends in Forest Cutblocks across British Columbia 
 
+<p align="center">
+  <img src="images/dem.png" alt="DEM image">
+</p>
+
 ### Background
 
 The province of British Columbia (BC) has a wide range of forest
@@ -140,6 +144,10 @@ Original Dataset:
 
 ## Investigating Species at Risk Observations Within Canadian National Parks
 
+<p align="center">
+  <img src="images/parks.png" alt="DEM image">
+</p>
+
 ### Background
 
 One of the primary purposes of parks is to protect species from negative
@@ -212,6 +220,11 @@ package.
 Original Dataset: <https://www.gbif.org/>
 
 ## Mapping Tree Species Across the Petawawa Research Forest using LiDAR
+
+<p align="center">
+  <img src="images/prf.png" alt="DEM image">
+</p>
+
 
 ### Background
 
