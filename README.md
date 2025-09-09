@@ -6,11 +6,11 @@ This GitHub repository contains introductory code and data for the GEM530 term p
 
 The project choices are listed below and are described in more detailed throughout this page.
 
-- **[Analyzing Topographic Trends in Forest Cutblocks across British Columbia](#analyzing-trends-in-forest-cutblocks-in-british-columbia-across-different-topographies)**
+- **[Analyzing Topographic Trends in Forest Cutblocks across British Columbia](#analyzing-topographic-trends-in-forest-cutblocks-across-british-columbia)**
 
 - **[Investigating Species at Risk Observations Within Canadian National Parks](#investigating-species-at-risk-observations-within-canadian-national-parks)**
 
-- **[Mapping Tree Species Across the Petawawa Research Forest using LiDAR](#mapping-tree-species-distribution-across-the-petawawa-research-forest-using-machine-learning)**
+- **[Mapping Tree Species Across the Petawawa Research Forest using LiDAR](#mapping-tree-species-across-the-petawawa-research-forest-using-lidar)**
 
 ## Data
 
