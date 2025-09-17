@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>GEM530 Term Projects</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    th { background: #f4f4f4; }
+    pre { background: #f8f8f8; padding: 10px; border-radius: 4px; }
+    code { background: #f4f4f4; padding: 2px 4px; border-radius: 3px; }
+    .center { text-align: center; }
+  </style>
+</head>
+<body>
+<h1 class="center">GEM530 Term Projects</h1>
+  
+<p><strong>This site contains introductory code and data for the GEM530 term projects. 
+           References relevant for each project are provided at the bottom of the page.</strong></p>
+
+<p class="last-updated"></p>
+
+<script>
+    // Set your GitHub username and repository name
+    const githubUser = "subornaa";
+    const repoName = "Geospatial-data-analysis-project-started-kit"; // This should match your actual repo name
+    const dateTagClass = ".last-updated";
+
+    // GitHub API endpoint for a single repo
+    const apiUrl = `https://api.github.com/repos/${githubUser}/${repoName}`;
+
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(repo => {
+            if (repo.pushed_at) {
+                var lastUpdated = new Date(repo.pushed_at);
+                var options = { year: 'numeric', month: 'long', day: 'numeric' };
+                var formattedDate = lastUpdated.toLocaleDateString('en-US', options);
+                document.querySelector(dateTagClass).textContent = `Last updated: ${formattedDate}`;
+            } else {
+                document.querySelector(dateTagClass).textContent = "Last updated: Unknown";
+            }
+        })
+        .catch(() => {
+            document.querySelector(dateTagClass).textContent = "Last updated: Error fetching date";
+        });
+</script>
+
+
+  <h2>Contributor list</h2>
+  <table>
+    <tr>
+      <th>Contributors</th>
+      <th>Affiliations</th>
+    </tr>
+    <tr>
+      <td>Dr. Suborna Ahmed</td>
+      <td>Forest Biometrics, Forest Resources Management, Faculty of Forestry, University of British Columbia</td>
+    </tr>
+    <tr>
+      <td>Harry Seely</td>
+      <td>Integrated Remote Sensing Studio, Forest Resources Management, Faculty of Forestry, University of British Columbia</td>
+    </tr>
+    <tr>
+      <td>Gurmandeep Bal</td>
+      <td>Computer Science, University of British Columbia</td>
+    </tr>
+  </table>
+
+  <h2>Projects</h2>
+  <p>The project choices are listed below and are described in more detailed throughout this page.</p>
+  <ul>
+    <li><strong><a href="#analyzing-topographic-trends-in-forest-cutblocks-across-british-columbia">Analyzing Topographic Trends in Forest Cutblocks across British Columbia</a></strong></li>
+    <li><strong><a href="#investigating-species-at-risk-observations-within-canadian-national-parks">Investigating Species at Risk Observations Within Canadian National Parks</a></strong></li>
+    <li><strong><a href="#mapping-tree-species-across-the-petawawa-research-forest-using-lidar">Mapping Tree Species Across the Petawawa Research Forest using LiDAR</a></strong></li>
+  </ul>
+
+  <h2>Project selection</h2>
+  <p>
+    Please visit the following link to rank your project choices in order of preference. Projects will be allocated to the groups that respond earliest based their ranking.
+  </p>
+  <p>
+    <strong>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6MQNUhqkCGPtO4WA5jFoYo4hNb8a_uAQ87fIhnFBkb6fitA/viewform?usp=header">Rank project choices here</a>
+    </strong>
+  </p>
+
+  <h2>Data</h2>
+  <p><strong>All project data can be downloaded from the GEM530 Discussion Teams page under:</strong></p>
+  <p>
+    <strong>
+      <a href="https://ubcca.sharepoint.com/:f:/t/ubccl-gr-FRST-231-98A-2021SA/EoHxHkAEVXdLlRRO_CchCcYBqop6GI-yzljQ9iSul--xMw?e=5hyCnN">Files&gt;Documents&gt;General&gt;gem530_term_project_data</a>
+    </strong>
+  </p>
+  <p>The data directory is structured as follows, with one folder per project. Each file is described in more detail below.</p>
+  <pre>
+/data
+    ├── cutblocks_topo/
+    │   ├── aoi.gpkg
+    │   ├── cutblocks.gpkg
+    │   └── dem.tif
+    ├── parks_sar/
+    │   ├── CAN-SAR_database.csv
+    │   └── parks.gpkg
+    └── petawawa_species/
+        ├── als_metrics.tif
+        ├── plot_data.xlsx
+        ├── plot_locations.gpkg
+        ├── prf_boundary.gpkg
+        └── sp_codes.csv
+  </pre>
+
+  <h2>Python environment setup</h2>
+  <ol>
+    <li>Download the <a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/cutblocks_topo.ipynb"><strong>pyproject.toml</strong></a> 
+        file and place it a directory where you will work on the project</li>
+        
+    <br>
+
+    <li>Open a terminal and check that <a href="https://docs.astral.sh/uv/"><strong>uv</strong></a> is installed by running 
+      <pre><code>uv --help</code></pre>
+
+    </li>
+    <li>Intialize the uv environment and install dependencies.
+      <pre><code>uv sync</code></pre>
+    </li>
+
+  </ol>
+
+  <h2 id="analyzing-topographic-trends-in-forest-cutblocks-across-british-columbia">Analyzing Topographic Trends in Forest Cutblocks across British Columbia</h2>
+  <p class="center">
+    <img src="images/dem.png" alt="DEM image" width="50%">
+  </p>
+
+  <h3>Background</h3>
+  <p>
+    The province of British Columbia (BC) has a wide range of forest conditions, with many different species and forest types. This ecological variability is in large part due to the topographic diversity across BC, with many mountainous regions, deep river valleys, and alpine areas. Consequently, a large amount of the harvested forest areas in BC are located on steep slopes.
+  </p>
+  <p>
+    A loss of forest cover on a steep slope can result in soil instability, since roots are no longer anchoring the soil. Under the correct circumstances, this instability can result in landslides, which can damage infrastructure and in some cases be fatal. A recent study by (Hancock and Wlodarczyk, 2025) examined the effect of the 2021 atmospheric river that occurred in BC on the frequency of geohazards (e.g., landslides, erosion, etc.) in harvested areas. The study found that geohazards occurred more frequently in cutblocks. Here we define a "cutblock" using the BC Forest Practices Board definition as "[a] specific area of land with defined boundaries, authorized for harvest".
+  </p>
+  <p>
+    Cutblocks, specifically clearcuts, can also result in increased risk of flooding since forest cover helps mediates the flow of water through the landscape. For example, a recent study by UBC Forestry professor Dr. Younes Alila and other researchers found that flooding is 18 times more likely in clear cut harvested areas (Pham et al., 2025).
+  </p>
+
+  <h3>Motivation</h3>
+  <p>
+    The <a href="https://www2.gov.bc.ca/gov/content/governments/organizational-structure/ministries-organizations/ministries/forests">BC Ministry of Forests</a> has requested your consulting company to perform a historic analysis of the range of topographic conditions found across cutblocks in the province. This preliminary study aims to shed light on what kind of topographic conditions have experienced harvesting, and lead to future work that incorporates geohazard and flooding data. Your company has been asked specifically to analyze trends regarding slope and aspect, as these are both noted as key variables based on recent research. The Ministry also requests that the analysis consult the relevant existing literature to incorporate other potentially useful topographic indicators for assessing to geohazard and flood risk in cutblocks. Finally, the Ministry has requested the analysis be limited to an area of interest (AOI) in central BC as this is a preliminary study.
+  </p>
+  <p>
+    <a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/cutblocks_topo.ipynb"><strong>View project notebook here</strong></a>
+  </p>
+
+  <h3>Dataset Description</h3>
+  <p>
+    This analysis includes the following datasets which are described below in more detail: 1) area of interest polygon; 2) historic cutblocks in BC; 3) digital elevation model. For more information about each dataset, consult the original dataset source.
+  </p>
+  <h4>Area of Interest (AOI)</h4>
+  <ul>
+    <li>3,686,567 km<sup>2</sup> area located in central BC.</li>
+    <li>Filename: aoi.gpkg</li>
+  </ul>
+  <h4>Historic Cutblocks</h4>
+  <ul>
+    <li>Harvested cutblocks in BC clipped to the AOI.</li>
+    <li>Filename: cutblocks.gpkg</li>
+    <li>Original Dataset: <a href="https://catalogue.data.gov.bc.ca/dataset/harvested-areas-of-bc-consolidated-cutblocks-">https://catalogue.data.gov.bc.ca/dataset/harvested-areas-of-bc-consolidated-cutblocks-</a></li>
+  </ul>
+  <h4>Digital Elevation Model</h4>
+  <ul>
+    <li>Digital Elevation Model (DEM) clipped to the AOI.</li>
+    <li>Filename: dem.tif</li>
+    <li>Original Dataset: <a href="https://open.canada.ca/data/en/dataset/18752265-bda3-498c-a4ba-9dfe68cb98da">https://open.canada.ca/data/en/dataset/18752265-bda3-498c-a4ba-9dfe68cb98da</a></li>
+  </ul>
+
+  <h2 id="investigating-species-at-risk-observations-within-canadian-national-parks">Investigating Species at Risk Observations Within Canadian National Parks</h2>
+  <p class="center">
+    <img src="images/parks.png" alt="DEM image" width="50%">
+  </p>
+
+  <h3>Background</h3>
+  <p>
+    One of the primary purposes of parks is to protect species from negative anthropogenic influences such as development and natural resource extraction. Parks are especially critical for species at risk (SAR) that may have specific habitat requirements. In Canada, SAR are defined legally under the <em>Species at Risk Act</em> (SARA) and are hosted on a publicly available registry (Canada, 2018).
+  </p>
+  <p>
+    Recent research has demonstrated how participatory monitoring datasets such as eBird and iNaturalist can help inform knowledge about protected area at the global scale (Mandeville et al., 2023). Specifically, these data can be used to assess the presence of threatened species within protected areas (Cordier et al., 2025).
+  </p>
+
+  <h3>Motivation</h3>
+  <p>
+    <a href="https://parks.canada.ca/">Parks Canada</a> has contacted your consulting company with a contract job to analyze the occurrence of species at risk within Canadian National Parks. The Agency is interested in understanding the occurrence of SAR across National Parks to better understand the conservation value of the parks and identify species that may have underrepresented habitat provided by existing parks.
+  </p>
+  <p>
+    Parks Canada (hereby the Agency) has requested your company make use of the Global Biodiversity Information Facility (GBIF), which combines global biodiversity datasets including citizen science data from eBird and iNaturalist in addition to observations from the scientific community such as fossil records. Parks Canada has requested the analysis be performed using the <a href="https://github.com/gbif/pygbif">GBIF Python Package</a> (pygbif). Ultimately, the goal of the Agency is to develop a dashboard website that summarizes SAR occurrences across all National parks that can be updated via the GBIF database.
+  </p>
+  <p>
+    <a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/parks_sar.ipynb"><strong>View project notebook here</strong></a>
+  </p>
+
+  <h3>Dataset Description</h3>
+  <p>
+    This analysis includes the following datasets which are described below in more detail: 1) national park polygons; 2) species at risk registry; 3) GBIF database.
+  </p>
+  <h4>National park polygons</h4>
+  <ul>
+    <li>Dataset shows current legal boundaries of all National parks in Canada.</li>
+    <li>Filename: parks.gpkg</li>
+    <li>Original Dataset: <a href="https://open.canada.ca/data/en/dataset/9e1507cd-f25c-4c64-995b-6563bf9d65bd">https://open.canada.ca/data/en/dataset/9e1507cd-f25c-4c64-995b-6563bf9d65bd</a></li>
+  </ul>
+  <h4>Species at risk registry</h4>
+  <ul>
+    <li>Dataset includes all legally designated SAR in Canada. The tabular version of this dataset provided was summarized by Naujokaitis-Lewis et al. (2022).</li>
+    <li>Filename: CAN-SAR_database.csv</li>
+    <li>Original Dataset: <a href="https://osf.io/e4a58/">https://osf.io/e4a58/</a></li>
+  </ul>
+  <h4>GBIF database</h4>
+  <ul>
+    <li>GBIF is an online data portal that hosts over 3 Million species occurrence records. In this analysis, these a subset of these records can be accessed and downloaded for local use via the pygbif python package.</li>
+    <li>Original Dataset: <a href="https://www.gbif.org/">https://www.gbif.org/</a></li>
+  </ul>
+
+  <h2 id="mapping-tree-species-across-the-petawawa-research-forest-using-lidar">Mapping Tree Species Across the Petawawa Research Forest using LiDAR</h2>
+  <p class="center">
+    <img src="images/prf.png" alt="DEM image" width="50%">
+  </p>
+
+  <h3>Background</h3>
+  <p>
+    Information about dominant tree species in a given forest stand is critical for effective forest management. Tree species vary in commercial, ecological, and cultural values, making them key for developing management goals.
+  </p>
+  <p>
+    Tree species can be modeled across the landscape using remote sensing since trees have distinct spectral signatures as a result of their unique photosynthetic pigments and leaf traits. However, modelling species with LiDAR data at a finder spatial scale can be more challenging since most LiDAR data only captures a single wavelength (typically near infrared, but can be different depending on the sensor).
+  </p>
+  <p>
+    Research has used conventional LiDAR to model tree dominant tree species in various forest ecosystems. For example, Räty et al. (2016) used ALS data in Finland to model dominant tree species with the downstream goal of enhancing timber volume estimation accuracy. Similarly, a study in the Quebec boreal forest found that five dominant tree species have distinct LiDAR vertical distributions that can be used to distinguish between species (Racine et al., 2021).
+  </p>
+
+  <h3>Motivation</h3>
+  <p>
+    The <a href="https://www.ontario.ca/page/ministry-natural-resources">Ontario Ministry of Natural Resources</a> (hereby the Ministry) is interested in making us of recently acquired airborne laser scanning (ALS) data to develop an enhanced forest inventory (EFI). An EFI is a new iteration of forest inventory that replaces historic sample plot and air photo interpretation with remote sensing based modelling to derive more accurate forest attribute estimates (White et al., 2016). One key attribute of an EFI is dominant species. The Ministry has contracted your consulting company to develop an ALS model that predicts dominant tree species using an area-based approach. The Ministry has requested that you use the Petawawa Research Forest (PRF) as a case study. This will ultimately be used to contribute to the Ministries province wide EFI. As a secondary item, the Ministry is also interested whether ALS is sufficient on its own to model species accurately, or whether multispectral data is required in addition to ALS to be used within a data fusion framework.
+  </p>
+  <p>
+    <a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/petawawa_species.ipynb"><strong>View project notebook here</strong></a>
+  </p>
+
+  <h3>Dataset Description</h3>
+  <p>
+    This analysis includes the following datasets which are described below in more detail: 1) Petawawa Research Forest (PRF) boundary; 2) PRF sample plot locations; 3) PRF sample plot data; 4) Ontario tree species codes; 5) ALS metrics.
+  </p>
+  <h4>Petawawa Research Forest (PRF) boundary</h4>
+  <ul>
+    <li>The PRF, located on the border of Ontario and Quebec, is the oldest research forest in Canada, established in 1918. It is considered a remote sensing "supersite" and has a large array of publicly available ground plot and remote sensing datasets. All the PRF data can be found at the following link:</li>
+    <li><a href="https://opendata.nfis.org/mapserver/PRF.html">https://opendata.nfis.org/mapserver/PRF.html</a></li>
+    <li>Filename: prf_boundary.gpkg</li>
+  </ul>
+  <h4>PRF sample plot locations</h4>
+  <ul>
+    <li>XY coordinates of ground plots sampled in the PRF during the summer of 2018.</li>
+    <li>Filename: plot_locations.gpkg</li>
+  </ul>
+  <h4>PRF sample plot data</h4>
+  <ul>
+    <li>This excel spreadsheet contains the tree level measurements (e.g., DBH) and aggregated plot level data (e.g., dominant species) for all the 2018 sample plots.</li>
+    <li>Filename: plot_data.xlsx</li>
+  </ul>
+  <h4>Ontario Tree Species Codes</h4>
+  <ul>
+    <li>Basic tabular dataset that provides join codes to convert species IDs from the PRF sample plot data to common and scientific species names.</li>
+    <li>Filename: sp_codes.csv</li>
+  </ul>
+  <h4>ALS metrics</h4>
+  <ul>
+    <li>Airborne Laser Scanning (i.e., LiDAR) metrics derived from the 2018 acquisition provided as a single GeoTIFF file for the PRF.</li>
+    <li>Filename: als_metrics.tif</li>
+  </ul>
+
+  <h2>References</h2>
+  <ul>
+    <li>
+      Canada, E. and C.C., 2018. Species at risk public registry [WWW Document]. URL
+      <a href="https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry.html">https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry.html</a>
+      (accessed 9.9.25).
+    </li>
+    <li>
+      Cordier, J.M., Osorio-Olvera, L., Huais, P.Y., Tomba, A.N., Villalobos, F., Nori, J., 2025. Capability of big data to capture threatened vertebrate diversity in protected areas. Conservation Biology 39, e14371.
+      <a href="https://doi.org/10.1111/cobi.14371">https://doi.org/10.1111/cobi.14371</a>
+    </li>
+    <li>
+      Hancock, C.-A., Wlodarczyk, K., 2025. The role of wildfires and forest harvesting on geohazards and channel instability during the November 2021 atmospheric river in southwestern British Columbia, Canada. Earth Surface Processes and Landforms 50, e6065.
+      <a href="https://doi.org/10.1002/esp.6065">https://doi.org/10.1002/esp.6065</a>
+    </li>
+    <li>
+      Mandeville, C.P., Nilsen, E.B., Herfindal, I., Finstad, A.G., 2023. Participatory monitoring drives biodiversity knowledge in global protected areas. Commun Earth Environ 4, 240.
+      <a href="https://doi.org/10.1038/s43247-023-00906-2">https://doi.org/10.1038/s43247-023-00906-2</a>
+    </li>
+    <li>
+      Naujokaitis-Lewis, I., Endicott, S., Guezen, J.M., 2022. CAN-SAR: A database of Canadian species at risk information. Sci Data 9, 289.
+      <a href="https://doi.org/10.1038/s41597-022-01381-8">https://doi.org/10.1038/s41597-022-01381-8</a>
+    </li>
+    <li>
+      Pham, H.C., Alila, Y., Caldwell, P.V., 2025. Stochastic framework reveals the controls of forest treatment -- peakflow causal relations in rain environment. Journal of Hydrology 661, 133704.
+      <a href="https://doi.org/10.1016/j.jhydrol.2025.133704">https://doi.org/10.1016/j.jhydrol.2025.133704</a>
+    </li>
+    <li>
+      Racine, E.B., Coops, N.C., Bégin, J., Myllymäki, M., 2021. Tree species, crown cover, and age as determinants of the vertical distribution of airborne LiDAR returns. Trees 35, 1845--1861.
+      <a href="https://doi.org/10.1007/s00468-021-02155-2">https://doi.org/10.1007/s00468-021-02155-2</a>
+    </li>
+    <li>
+      Räty, J., Vauhkonen, J., Maltamo, M., Tokola, T., 2016. On the potential to predetermine dominant tree species based on sparse-density airborne laser scanning data for improving subsequent predictions of species-specific timber volumes. For. Ecosyst. 3, 1.
+      <a href="https://doi.org/10.1186/s40663-016-0060-0">https://doi.org/10.1186/s40663-016-0060-0</a>
+    </li>
+    <li>
+      White, J.C., Coops, N.C., Wulder, M.A., Vastaranta, M., Hilker, T., Tompalski, P., 2016. Remote Sensing Technologies for Enhancing Forest Inventories: A Review. Canadian Journal of Remote Sensing 42, 619--641.
+      <a href="https://doi.org/10.1080/07038992.2016.1207484">https://doi.org/10.1080/07038992.2016.1207484</a>
+    </li>
+  </ul>
