@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>GEM530 Term Projects</title>
   <style>
+    body { font-family: Arial, sans-serif; } /* Added line */
     table { border-collapse: collapse; width: 100%; }
     th, td { border: 1px solid #ccc; padding: 8px; }
     th { background: #f4f4f4; }
@@ -12,6 +13,7 @@
     .center { text-align: center; }
   </style>
 </head>
+
 <body>
 <h1 class="center">GEM530 Term Projects</h1>
   
@@ -68,12 +70,25 @@
   </table>
 
   <h2>Projects</h2>
+
   <p>The project choices are listed below and are described in more detailed throughout this page.</p>
+
   <ul>
     <li><strong><a href="#analyzing-topographic-trends-in-forest-cutblocks-across-british-columbia">Analyzing Topographic Trends in Forest Cutblocks across British Columbia</a></strong></li>
+    
     <li><strong><a href="#investigating-species-at-risk-observations-within-canadian-national-parks">Investigating Species at Risk Observations Within Canadian National Parks</a></strong></li>
+    
     <li><strong><a href="#mapping-tree-species-across-the-petawawa-research-forest-using-lidar">Mapping Tree Species Across the Petawawa Research Forest using LiDAR</a></strong></li>
   </ul>
+
+  <br>
+
+<strong>Please note:</strong>
+  <br>
+  <br>
+    While these projects reference Canadian government entities and use publicly available data, all project backgrounds, motivations, and scenarios are entirely fictional and created solely for educational purposes in this course. 
+    No actual government entities are involved, and students should not contact any government departments or officials regarding these projects. 
+    All inquiries should be directed to the course instructors and teaching assistants.
 
   <h2>Project selection</h2>
   <p>
@@ -124,8 +139,20 @@
     <li>Intialize the uv environment and install dependencies.
       <pre><code>uv sync</code></pre>
     </li>
-
   </ol>
+
+  <h2>Project Jupyter Notebooks</h2>
+
+  Each term project has an associated Jupyter Notebook that contains starter code used as a baseline for the analysis. 
+  These notebooks are mentioned in each section, and are also linked below:
+
+  <ul>
+    <li><a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/cutblocks_topo.ipynb"><strong>Cutblocks and Topography</strong></a>
+    <li><a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/parks_sar.ipynb"><strong>Species at Risk and Parks</strong></a>
+    <li><a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/petawawa_species.ipynb"><strong>Tree Species and LiDAR</strong></a>
+  </ul>
+
+
 
   <h2 id="analyzing-topographic-trends-in-forest-cutblocks-across-british-columbia">Analyzing Topographic Trends in Forest Cutblocks across British Columbia</h2>
   <p class="center">
@@ -188,15 +215,15 @@
     One of the primary purposes of parks is to protect species from negative anthropogenic influences such as development and natural resource extraction. Parks are especially critical for species at risk (SAR) that may have specific habitat requirements. In Canada, SAR are defined legally under the <em>Species at Risk Act</em> (SARA) and are hosted on a publicly available registry (Canada, 2018).
   </p>
   <p>
-    Recent research has demonstrated how participatory monitoring datasets such as eBird and iNaturalist can help inform knowledge about protected area at the global scale (Mandeville et al., 2023). Specifically, these data can be used to assess the presence of threatened species within protected areas (Cordier et al., 2025).
+    Recent research has demonstrated how participatory monitoring datasets such as eBird and iNaturalist can help inform protected area management at the global scale (Mandeville et al., 2023). Specifically, these data can be used to assess the presence of SAR within protected areas (Cordier et al., 2025).
   </p>
 
   <h3>Motivation</h3>
   <p>
-    <a href="https://parks.canada.ca/">Parks Canada</a> has contacted your consulting company with a contract job to analyze the occurrence of species at risk within Canadian National Parks. The Agency is interested in understanding the occurrence of SAR across National Parks to better understand the conservation value of the parks and identify species that may have underrepresented habitat provided by existing parks.
+    <a href="https://parks.canada.ca/">Parks Canada</a> has contacted your consulting company with a contract job to analyze the occurrence of SAR within Canadian National Parks. The Agency is interested in understanding the occurrence of SAR across National Parks to better understand the conservation value of the parks and identify species that may have underrepresented habitat provided by existing parks.
   </p>
   <p>
-    Parks Canada (hereby the Agency) has requested your company make use of the Global Biodiversity Information Facility (GBIF), which combines global biodiversity datasets including citizen science data from eBird and iNaturalist in addition to observations from the scientific community such as fossil records. Parks Canada has requested the analysis be performed using the <a href="https://github.com/gbif/pygbif">GBIF Python Package</a> (pygbif). Ultimately, the goal of the Agency is to develop a dashboard website that summarizes SAR occurrences across all National parks that can be updated via the GBIF database.
+    Parks Canada (hereby the Agency) has requested your company make use of the <a href=https://www.gbif.org>Global Biodiversity Information Facility (GBIF)<a>, which combines global biodiversity datasets including citizen science data from eBird and iNaturalist in addition to observations from the scientific community such as fossil records. Parks Canada has requested the analysis be performed using the <a href="https://github.com/gbif/pygbif">GBIF Python Package</a> (pygbif). Ultimately, the goal of the Agency is to develop a dashboard website that summarizes SAR occurrences across all National parks that can be updated via the GBIF database.
   </p>
   <p>
     <a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/parks_sar.ipynb"><strong>View project notebook here</strong></a>
@@ -235,7 +262,7 @@
     Information about dominant tree species in a given forest stand is critical for effective forest management. Tree species vary in commercial, ecological, and cultural values, making them key for developing management goals.
   </p>
   <p>
-    Tree species can be modeled across the landscape using remote sensing since trees have distinct spectral signatures as a result of their unique photosynthetic pigments and leaf traits. However, modelling species with LiDAR data at a finder spatial scale can be more challenging since most LiDAR data only captures a single wavelength (typically near infrared, but can be different depending on the sensor).
+    Tree species can be modeled across the landscape using remote sensing since trees have distinct spectral signatures as a result of their unique photosynthetic pigments and leaf traits. However, modelling species with LiDAR data at a finer spatial scale can be more challenging since most LiDAR data only captures a single wavelength (typically near infrared, but can be different depending on the sensor).
   </p>
   <p>
     Research has used conventional LiDAR to model tree dominant tree species in various forest ecosystems. For example, Räty et al. (2016) used ALS data in Finland to model dominant tree species with the downstream goal of enhancing timber volume estimation accuracy. Similarly, a study in the Quebec boreal forest found that five dominant tree species have distinct LiDAR vertical distributions that can be used to distinguish between species (Racine et al., 2021).
@@ -243,7 +270,7 @@
 
   <h3>Motivation</h3>
   <p>
-    The <a href="https://www.ontario.ca/page/ministry-natural-resources">Ontario Ministry of Natural Resources</a> (hereby the Ministry) is interested in making us of recently acquired airborne laser scanning (ALS) data to develop an enhanced forest inventory (EFI). An EFI is a new iteration of forest inventory that replaces historic sample plot and air photo interpretation with remote sensing based modelling to derive more accurate forest attribute estimates (White et al., 2016). One key attribute of an EFI is dominant species. The Ministry has contracted your consulting company to develop an ALS model that predicts dominant tree species using an area-based approach. The Ministry has requested that you use the Petawawa Research Forest (PRF) as a case study. This will ultimately be used to contribute to the Ministries province wide EFI. As a secondary item, the Ministry is also interested whether ALS is sufficient on its own to model species accurately, or whether multispectral data is required in addition to ALS to be used within a data fusion framework.
+    The <a href="https://www.ontario.ca/page/ministry-natural-resources">Ontario Ministry of Natural Resources</a> (hereby the Ministry) is interested in making us of recently acquired airborne laser scanning (ALS) data to develop an enhanced forest inventory (EFI). An EFI is a new iteration of forest inventory that replaces historic sample plot and air photo interpretation with remote sensing based modelling to derive more accurate forest attribute estimates (White et al., 2016). One key attribute of an EFI is dominant species. The Ministry has contracted your consulting company to develop an ALS model that predicts dominant tree species using an area-based approach. The Ministry has requested that you use the Petawawa Research Forest (PRF) as a case study. This will ultimately be used to contribute to the province wide EFI. As a secondary item, the Ministry is also interested whether ALS is sufficient on its own to model species accurately, or whether multispectral data is required in addition to ALS to be used within a data fusion framework.
   </p>
   <p>
     <a href="https://github.com/subornaa/Geospatial-data-analysis-project-started-kit/blob/main/petawawa_species.ipynb"><strong>View project notebook here</strong></a>
@@ -281,42 +308,39 @@
   </ul>
 
   <h2>References</h2>
-  <ul>
-    <li>
+    <br>
       Canada, E. and C.C., 2018. Species at risk public registry [WWW Document]. URL
       <a href="https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry.html">https://www.canada.ca/en/environment-climate-change/services/species-risk-public-registry.html</a>
       (accessed 9.9.25).
-    </li>
-    <li>
+
+      <br><br>
       Cordier, J.M., Osorio-Olvera, L., Huais, P.Y., Tomba, A.N., Villalobos, F., Nori, J., 2025. Capability of big data to capture threatened vertebrate diversity in protected areas. Conservation Biology 39, e14371.
       <a href="https://doi.org/10.1111/cobi.14371">https://doi.org/10.1111/cobi.14371</a>
-    </li>
-    <li>
+
+      <br><br>
       Hancock, C.-A., Wlodarczyk, K., 2025. The role of wildfires and forest harvesting on geohazards and channel instability during the November 2021 atmospheric river in southwestern British Columbia, Canada. Earth Surface Processes and Landforms 50, e6065.
       <a href="https://doi.org/10.1002/esp.6065">https://doi.org/10.1002/esp.6065</a>
-    </li>
-    <li>
+
+      <br><br>
       Mandeville, C.P., Nilsen, E.B., Herfindal, I., Finstad, A.G., 2023. Participatory monitoring drives biodiversity knowledge in global protected areas. Commun Earth Environ 4, 240.
       <a href="https://doi.org/10.1038/s43247-023-00906-2">https://doi.org/10.1038/s43247-023-00906-2</a>
-    </li>
-    <li>
+
+      <br><br>
       Naujokaitis-Lewis, I., Endicott, S., Guezen, J.M., 2022. CAN-SAR: A database of Canadian species at risk information. Sci Data 9, 289.
       <a href="https://doi.org/10.1038/s41597-022-01381-8">https://doi.org/10.1038/s41597-022-01381-8</a>
-    </li>
-    <li>
+
+      <br><br>
       Pham, H.C., Alila, Y., Caldwell, P.V., 2025. Stochastic framework reveals the controls of forest treatment -- peakflow causal relations in rain environment. Journal of Hydrology 661, 133704.
       <a href="https://doi.org/10.1016/j.jhydrol.2025.133704">https://doi.org/10.1016/j.jhydrol.2025.133704</a>
-    </li>
-    <li>
+
+      <br><br>
       Racine, E.B., Coops, N.C., Bégin, J., Myllymäki, M., 2021. Tree species, crown cover, and age as determinants of the vertical distribution of airborne LiDAR returns. Trees 35, 1845--1861.
       <a href="https://doi.org/10.1007/s00468-021-02155-2">https://doi.org/10.1007/s00468-021-02155-2</a>
-    </li>
-    <li>
+
+      <br><br>
       Räty, J., Vauhkonen, J., Maltamo, M., Tokola, T., 2016. On the potential to predetermine dominant tree species based on sparse-density airborne laser scanning data for improving subsequent predictions of species-specific timber volumes. For. Ecosyst. 3, 1.
       <a href="https://doi.org/10.1186/s40663-016-0060-0">https://doi.org/10.1186/s40663-016-0060-0</a>
-    </li>
-    <li>
+
+      <br><br>
       White, J.C., Coops, N.C., Wulder, M.A., Vastaranta, M., Hilker, T., Tompalski, P., 2016. Remote Sensing Technologies for Enhancing Forest Inventories: A Review. Canadian Journal of Remote Sensing 42, 619--641.
       <a href="https://doi.org/10.1080/07038992.2016.1207484">https://doi.org/10.1080/07038992.2016.1207484</a>
-    </li>
-  </ul>
