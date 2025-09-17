@@ -1,6 +1,15 @@
-# GEM530 Term Project Descriptions
+# GEM530 Term Projects
 
-This GitHub repository contains introductory code and data for the GEM530 term projects. References relevant for each project are provided at the bottom of the page.
+**This GitHub repository contains introductory code and data for the GEM530 term projects. References relevant for each project are provided at the bottom of the page.**
+
+## Contributor list
+
+| Contributors        | Affiliations                                                                                                       |
+|---------------------|--------------------------------------------------------------------------------------------------------------------|
+| Dr. Suborna Ahmed   | Forest Biometrics, Forest Resources Management, Faculty of Forestry, University of British Columbia                |
+| Harry Seely         | Integrated Remote Sensing Studio, Forest Resources Management, Faculty of Forestry, University of British Columbia |
+| Gurmandeep Bal      | Computer Science, University of British Columbia                                                                   |
+
 
 ## Projects
 
