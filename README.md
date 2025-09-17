@@ -69,7 +69,7 @@ The data directory is structured as follows, with one folder per project. Each f
 ## Analyzing Topographic Trends in Forest Cutblocks across British Columbia 
 
 <p align="center">
-  <img src="images/dem.png" alt="DEM image">
+  <img src="images/dem.png" alt="DEM image" width="50%">
 </p>
 
 ### Background
@@ -151,7 +151,7 @@ Original Dataset:
 ## Investigating Species at Risk Observations Within Canadian National Parks
 
 <p align="center">
-  <img src="images/parks.png" alt="DEM image">
+  <img src="images/parks.png" alt="DEM image" width="50%">
 </p>
 
 ### Background
@@ -228,7 +228,7 @@ Original Dataset: <https://www.gbif.org/>
 ## Mapping Tree Species Across the Petawawa Research Forest using LiDAR
 
 <p align="center">
-  <img src="images/prf.png" alt="DEM image">
+  <img src="images/prf.png" alt="DEM image" width="50%">
 </p>
 
 
